@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artem Kozlov - Cloud Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================
+           CSS VARIABLES - Controls all colors/spacing
+           Think of these as "settings" for the whole page
+           ========================================== */
+        :root {
+            --bg: #FAFAF9;
+            --surface: #FFFFFF;
+            --text: #1A1A1A;
+            --text-secondary: #5C5C5C;
+            --accent: #E87A2E;
+            --accent-light: #FFF3EB;
+            --border: #E8E5E0;
+            --tag-bg: #F0EDEA;
+            --section-gap: 2rem;
+        }
+
+        /* ==========================================
+           RESET & BASE - Clean starting point
+           ========================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ==========================================
+           LAYOUT - The main container
+           max-width keeps it readable on big screens
+           ========================================== */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* ==========================================
+           HEADER - Your name and contact info
+           This is the first thing anyone sees
+           ========================================== */
+        .header {
+            padding: 2.5rem 0;
+            border-bottom: 2px solid var(--text);
+            margin-bottom: var(--section-gap);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 0.25rem;
+        }
+
+        .header .tagline {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-row a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .contact-row a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* ==========================================
+           SECTIONS - Each resume section
+           ========================================== */
+        .section {
+            margin-bottom: var(--section-gap);
+        }
+
+        .section-title {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* ==========================================
+           SUMMARY - The intro paragraph
+           ========================================== */
+        .summary p {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--text-secondary);
+        }
+
+        /* ==========================================
+           SKILLS - Tags that show your abilities
+           ========================================== */
+        .skills-group {
+            margin-bottom: 1rem;
+        }
+
+        .skills-group-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .tag {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.3rem 0.7rem;
+            background: var(--tag-bg);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        .tag.highlight {
+            background: var(--accent-light);
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* ==========================================
+           CERTIFICATIONS - Badges row
+           ========================================== */
+        .certs-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .cert-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .cert-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #34A853;
+            flex-shrink: 0;
+        }
+
+        /* ==========================================
+           EXPERIENCE & EDUCATION - Job/school entries
+           ========================================== */
+        .entry {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .entry:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .entry-title {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .entry-date {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            padding-top: 0.1rem;
+        }
+
+        .entry-org {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .entry-org a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .entry-org a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .entry ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .entry li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.35rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .entry li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-family: 'DM Mono', monospace;
+            font-weight: 500;
+        }
+
+        /* ==========================================
+           FOOTER
+           ========================================== */
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--text);
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .footer span {
+            font-family: 'DM Mono', monospace;
+            color: var(--accent);
+        }
+
+        /* ==========================================
+           RESPONSIVE - Looks good on phones too
+           ========================================== */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .entry-header {
+                flex-direction: column;
+                gap: 0.15rem;
+            }
+
+            .contact-row {
+                gap: 0.3rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ========== HEADER ========== -->
+        <header class="header">
+            <h1>Artem Kozlov</h1>
+            <div class="tagline">Cloud Engineer - U.S. Army Veteran - Secret Clearance</div>
+            <div class="contact-row">
+                <span>Copperas Cove, TX</span>
+                <span>(917) 674-3513</span>
+                <a href="mailto:artem.kozlov99@icloud.com">artem.kozlov99@icloud.com</a>
+                <a href="https://linkedin.com/in/artem-kozlov-v" target="_blank">LinkedIn</a>
+                <a href="https://github.com/artemkoz99" target="_blank">GitHub</a>
+            </div>
+        </header>
+
+        <!-- ========== SUMMARY ========== -->
+        <section class="section summary">
+            <div class="section-title">About</div>
+            <p>U.S. Army Veteran with an active Secret Security Clearance and hands-on experience in IT operations, supply chain logistics, and cybersecurity fundamentals. Pursuing a Bachelor's Degree in Computer Information Systems with a Cloud Administration focus. Certified in CompTIA Security+ and Linux+, with practical skills in Linux system administration, SIEM monitoring, and network security. Seeking a Cloud/Software Engineering internship to apply technical knowledge in cloud computing environments, including AWS.</p>
+        </section>
+
+        <!-- ========== SKILLS ========== -->
+        <section class="section">
+            <div class="section-title">Technical Skills</div>
+
+            <div class="skills-group">
+                <div class="skills-group-label">Cloud & Infrastructure</div>
+                <div class="tags">
+                    <span class="tag highlight">AWS</span>
+                    <span class="tag">Cloud Computing</span>
+                    <span class="tag">IAM</span>
+                    <span class="tag">S3</span>
+                    <span class="tag">CloudFront</span>
+                    <span class="tag">Virtualization</span>
+                </div>
+            </div>
+
+            <div class="skills-group">
+                <div class="skills-group-label">Operating Systems</div>
+                <div class="tags">
+                    <span class="tag">Linux/Unix (Ubuntu, CentOS)</span>
+                    <span class="tag">Windows Server</span>
+                </div>
+            </div>
+
+            <div class="skills-group">
+                <div class="skills-group-label">Networking</div>
+                <div class="tags">
+                    <span class="tag">TCP/IP</span>
+                    <span class="tag">DNS</span>
+                    <span class="tag">DHCP</span>
+                    <span class="tag">HTTP/HTTPS</span>
+                    <span class="tag">OSI Model</span>
+                    <span class="tag">Subnetting</span>
+                    <span class="tag">Routing</span>
+                    <span class="tag">Firewalls</span>
+                </div>
+            </div>
+
+            <div class="skills-group">
+                <div class="skills-group-label">Security</div>
+                <div class="tags">
+                    <span class="tag">Splunk SIEM</span>
+                    <span class="tag">Network Security</span>
+                    <span class="tag">Risk Assessment</span>
+                    <span class="tag">Incident Response</span>
+                </div>
+            </div>
+
+            <div class="skills-group">
+                <div class="skills-group-label">Tools & Languages</div>
+                <div class="tags">
+                    <span class="tag">Python (Basic)</span>
+                    <span class="tag">Git/GitHub (Basic)</span>
+                    <span class="tag">Bash/Shell (Basic)</span>
+                    <span class="tag highlight">SAP (Proficient)</span>
+                    <span class="tag">HTML/CSS/JS (Basic)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CERTIFICATIONS ========== -->
+        <section class="section">
+            <div class="section-title">Certifications & Clearance</div>
+            <div class="certs-grid">
+                <div class="cert-badge"><span class="dot"></span>CompTIA Security+</div>
+                <div class="cert-badge"><span class="dot"></span>CompTIA Linux+</div>
+                <div class="cert-badge"><span class="dot"></span>U.S. Secret Security Clearance</div>
+            </div>
+        </section>
+
+        <!-- ========== EXPERIENCE ========== -->
+        <section class="section">
+            <div class="section-title">Experience</div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <div class="entry-title">Unit Supply Specialist (92Y)</div>
+                    <div class="entry-date">May 2022 - Oct 2025</div>
+                </div>
+                <div class="entry-org">United States Army, Active Duty</div>
+                <ul>
+                    <li>Managed and audited a $33 million technology and equipment portfolio using SAP-based enterprise resource planning systems, ensuring 100% accountability across two company-level supply operations</li>
+                    <li>Served as primary supply cage manager for two separate companies, overseeing inventory control, equipment distribution, and property accountability for 200+ personnel</li>
+                    <li>Trained and mentored 4 junior soldiers on supply procedures, inventory management systems, and standard operating protocols</li>
+                    <li>Coordinated logistics operations and maintained detailed digital records, demonstrating proficiency in data management and enterprise system administration</li>
+                    <li>Held an active Secret Security Clearance throughout service, handling sensitive government materials and information systems</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ========== PROJECTS ========== -->
+        <section class="section">
+            <div class="section-title">Projects</div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <div class="entry-title">AWS Cloud Resume</div>
+                    <div class="entry-date">Apr 2026</div>
+                </div>
+                <div class="entry-org"><a href="https://github.com/artemkoz99/cloud-resume" target="_blank">github.com/artemkoz99/cloud-resume</a></div>
+                <ul>
+                    <li>Deployed a static portfolio website on AWS S3 with CloudFront CDN distribution for global content delivery</li>
+                    <li>Configured IAM roles and bucket policies following AWS security best practices and principle of least privilege</li>
+                    <li>Managed project version control using Git and GitHub, maintaining clean commit history and documentation</li>
+                    <li>Documented full architecture and deployment process in a public GitHub repository</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ========== EDUCATION ========== -->
+        <section class="section">
+            <div class="section-title">Education</div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <div class="entry-title">Applied Bachelor's in Computer Information Systems</div>
+                    <div class="entry-date">Nov 2025 - Sep 2028</div>
+                </div>
+                <div class="entry-org">California Institute of Applied Technology - Cloud Administration Focus</div>
+                <ul>
+                    <li>Concentration in Cloud Administration covering cloud infrastructure, networking, and systems management</li>
+                    <li>Relevant coursework: Cloud Computing, Network Administration, Information Security, Database Management</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <div class="entry-title">Cybersecurity Training Program</div>
+                    <div class="entry-date">May 2025 - Aug 2025</div>
+                </div>
+                <div class="entry-org">NPower</div>
+                <ul>
+                    <li>Completed intensive cybersecurity training with hands-on labs in Linux system administration, Splunk SIEM monitoring, and network security fundamentals</li>
+                    <li>Earned CompTIA Security+ and CompTIA Linux+ certifications through program curriculum</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ========== FOOTER ========== -->
+        <footer class="footer">
+            <p>Built and hosted on <span>AWS</span> (S3 + CloudFront + IAM) &mdash; <span>2026</span></p>
+        </footer>
+
+    </div>
+</body>
+</html>
